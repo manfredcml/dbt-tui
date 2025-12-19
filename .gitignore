@@ -1,0 +1,28 @@
+# Rust
+/target
+Cargo.lock
+
+# DBT
+examples/*/target/
+examples/*/dbt_packages/
+examples/*/logs/
+examples/*/.user.yml
+
+# Python
+*.pyc
+__pycache__/
+*.egg-info/
+.venv/
+venv/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+.serena
+logs

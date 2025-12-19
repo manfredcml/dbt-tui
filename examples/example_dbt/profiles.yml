@@ -1,0 +1,23 @@
+ecommerce_analytics:
+  target: dev
+  outputs:
+    dev:
+      type: postgres
+      host: localhost
+      port: 5432
+      user: dbt_user
+      password: dbt_password
+      dbname: analytics
+      schema: analytics
+      threads: 4
+      keepalives_idle: 0
+    prod:
+      type: postgres
+      host: localhost
+      port: 5432
+      user: dbt_user
+      password: dbt_password
+      dbname: analytics
+      schema: analytics_prod
+      threads: 8
+      keepalives_idle: 0

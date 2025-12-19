@@ -1,0 +1,8 @@
+code,discount_type,discount_value,min_order_amount,valid_from,valid_to,is_active
+SAVE10,percentage,10,50,2024-01-01,2024-12-31,true
+WELCOME20,percentage,20,0,2024-01-01,2024-12-31,true
+SPRING15,percentage,15,75,2024-03-01,2024-05-31,true
+VIP25,percentage,25,100,2024-01-01,2024-12-31,true
+FLASH30,percentage,30,150,2024-05-01,2024-05-31,true
+FREESHIP,shipping,0,50,2024-01-01,2024-12-31,true
+SUMMER10,percentage,10,0,2024-06-01,2024-08-31,true

@@ -1,0 +1,65 @@
+version: 2
+
+models:
+  - name: customers
+    description: Customer dimension table with complete order history and segmentation
+    columns:
+      - name: customer_id
+        description: Primary key - unique customer identifier
+        data_tests:
+          - unique
+          - not_null
+      - name: email
+        description: Customer email address (lowercase normalized)
+        data_tests:
+          - unique
+          - not_null
+      - name: customer_segment
+        description: Customer value segment based on lifetime revenue
+        data_tests:
+          - accepted_values:
+              values: ['VIP', 'Regular', 'New', 'Prospect']
+
+  - name: orders
+    description: Order fact table with complete order details and metrics
+    columns:
+      - name: order_id
+        description: Primary key - unique order identifier
+        data_tests:
+          - unique
+          - not_null
+      - name: customer_id
+        description: Foreign key to customers table
+        data_tests:
+          - not_null
+          - relationships:
+              to: ref('stg_customers')
+              field: customer_id
+      - name: order_status
+        description: Current status of the order
+        data_tests:
+          - accepted_values:
+              values: ['pending', 'processing', 'shipped', 'delivered', 'cancelled', 'returned']
+      - name: order_size_bucket
+        description: Order value categorization
+        data_tests:
+          - accepted_values:
+              values: ['Small', 'Medium', 'Large']
+
+  - name: products
+    description: Product dimension with sales performance and review metrics
+    columns:
+      - name: product_id
+        description: Primary key - unique product identifier
+        data_tests:
+          - unique
+          - not_null
+      - name: sku
+        description: Stock keeping unit
+        data_tests:
+          - unique
+      - name: sales_tier
+        description: Product sales performance tier
+        data_tests:
+          - accepted_values:
+              values: ['Top Seller', 'Good Performer', 'Regular', 'No Sales']

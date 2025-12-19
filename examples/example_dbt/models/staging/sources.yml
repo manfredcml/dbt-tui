@@ -1,0 +1,128 @@
+version: 2
+
+sources:
+  - name: raw
+    description: Raw e-commerce data from the source systems
+    schema: raw
+    tables:
+      - name: customers
+        description: Raw customer registration data
+        columns:
+          - name: id
+            description: Primary key - unique customer identifier
+            data_tests:
+              - unique
+              - not_null
+          - name: email
+            description: Customer email address
+            data_tests:
+              - unique
+              - not_null
+          - name: country_code
+            description: ISO 3-letter country code
+
+      - name: products
+        description: Product catalog data
+        columns:
+          - name: id
+            description: Primary key - unique product identifier
+            data_tests:
+              - unique
+              - not_null
+          - name: sku
+            description: Stock keeping unit
+            data_tests:
+              - unique
+          - name: price
+            description: Product selling price
+            data_tests:
+              - not_null
+
+      - name: orders
+        description: Customer order headers
+        columns:
+          - name: id
+            description: Primary key - unique order identifier
+            data_tests:
+              - unique
+              - not_null
+          - name: customer_id
+            description: Foreign key to customers table
+            data_tests:
+              - not_null
+              - relationships:
+                  to: source('raw', 'customers')
+                  field: id
+
+      - name: order_items
+        description: Individual line items within orders
+        columns:
+          - name: id
+            description: Primary key
+            data_tests:
+              - unique
+              - not_null
+          - name: order_id
+            description: Foreign key to orders
+            data_tests:
+              - not_null
+          - name: product_id
+            description: Foreign key to products
+            data_tests:
+              - not_null
+
+      - name: payments
+        description: Payment transactions for orders
+        columns:
+          - name: id
+            description: Primary key
+            data_tests:
+              - unique
+              - not_null
+          - name: order_id
+            description: Foreign key to orders
+            data_tests:
+              - not_null
+          - name: payment_method
+            description: Method of payment
+            data_tests:
+              - accepted_values:
+                  values: ['credit_card', 'paypal', 'bank_transfer', 'gift_card']
+
+      - name: campaigns
+        description: Marketing campaign definitions
+        columns:
+          - name: id
+            description: Primary key
+            data_tests:
+              - unique
+              - not_null
+
+      - name: campaign_interactions
+        description: Customer interactions with marketing campaigns
+        columns:
+          - name: id
+            description: Primary key
+            data_tests:
+              - unique
+              - not_null
+          - name: interaction_type
+            description: Type of interaction
+            data_tests:
+              - accepted_values:
+                  values: ['impression', 'click', 'email_open', 'conversion']
+
+      - name: reviews
+        description: Product reviews submitted by customers
+        columns:
+          - name: id
+            description: Primary key
+            data_tests:
+              - unique
+              - not_null
+          - name: rating
+            description: Star rating 1-5
+            data_tests:
+              - not_null
+              - accepted_values:
+                  values: [1, 2, 3, 4, 5]

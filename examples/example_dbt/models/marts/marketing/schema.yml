@@ -1,0 +1,30 @@
+version: 2
+
+models:
+  - name: campaign_performance
+    description: Marketing campaign performance metrics with ROI estimates
+    columns:
+      - name: campaign_id
+        description: Primary key - unique campaign identifier
+        data_tests:
+          - unique
+          - not_null
+      - name: channel
+        description: Marketing channel
+        data_tests:
+          - accepted_values:
+              values: ['email', 'google_ads', 'facebook_ads', 'instagram']
+
+  - name: customer_acquisition
+    description: Customer acquisition channel analysis with conversion and value metrics
+    columns:
+      - name: acquisition_channel
+        description: The source through which customer was acquired
+        data_tests:
+          - unique
+          - not_null
+      - name: channel_quality
+        description: Quality rating for the acquisition channel
+        data_tests:
+          - accepted_values:
+              values: ['Excellent', 'Good', 'Average', 'Needs Improvement']

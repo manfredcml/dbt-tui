@@ -1,0 +1,26 @@
+version: 2
+
+models:
+  - name: revenue_daily
+    description: Daily revenue aggregation with running totals for finance reporting
+    columns:
+      - name: order_date
+        description: The date of orders
+        data_tests:
+          - unique
+          - not_null
+      - name: net_revenue
+        description: Total revenue after discounts plus shipping
+        data_tests:
+          - not_null
+
+  - name: payment_method_analysis
+    description: Payment method performance and refund analysis
+    columns:
+      - name: payment_method
+        description: The payment method used
+        data_tests:
+          - unique
+          - not_null
+          - accepted_values:
+              values: ['credit_card', 'paypal', 'bank_transfer', 'gift_card']

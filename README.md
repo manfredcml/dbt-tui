@@ -15,7 +15,7 @@
 
 **dbt-tui** is a fast, keyboard-driven terminal UI for [dbt](https://www.getdbt.com/) (data build tool). Think [lazygit](https://github.com/jesseduffield/lazygit), but for your data transformations.
 
-Built with Rust for speed and efficiency. Single binary, no dependencies.
+Built with Rust for speed and efficiency. Single binary. Simple installation.
 
 ![dbt-tui main interface](./assets/screenshots/main.png)
 
